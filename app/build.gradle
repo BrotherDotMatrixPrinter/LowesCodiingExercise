@@ -3,6 +3,15 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 
+    // Kapt
+    id 'kotlin-kapt'
+
+    // KSP
+    id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
+
+    // Hilt
+    id 'dagger.hilt.android.plugin'
+
 }
 
 android {
@@ -22,6 +31,20 @@ android {
         vectorDrawables {
 
             useSupportLibrary true
+
+        }
+
+        javaCompileOptions {
+
+            annotationProcessorOptions {
+
+                arguments += [
+
+                        "dagger.gradle.incremental":"true"
+
+                ]
+
+            }
 
         }
 
@@ -97,9 +120,24 @@ dependencies {
     // ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout-compose:$constraintlayout_version"
 
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    // LiveData
+    implementation 'androidx.ui:ui-livedata:0.1.0-dev14'
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    ksp "com.squareup.moshi:moshi-kotlin-codegen:$moshi_codegen_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
     // Testing
     testImplementation 'junit:junit:4.13.2'

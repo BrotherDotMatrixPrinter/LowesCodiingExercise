@@ -1,5 +1,6 @@
 package com.funnycop.lowescodingexercise.ui.composable
 
+import android.util.Log
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -47,14 +48,16 @@ fun CityLookup(navController: NavController) {
 
         Spacer(
 
-            modifier = Modifier.height(8.dp).constrainAs(spacer) {
+            modifier = Modifier
+                .height(8.dp)
+                .constrainAs(spacer) {
 
-                top.linkTo(textField.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-                bottom.linkTo(button.top)
+                    top.linkTo(textField.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(button.top)
 
-            }
+                }
 
         )
 
