@@ -106,9 +106,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
 
-    // Accompanist
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
-
     // Compose
     implementation "androidx.compose.compiler:compiler:$compose_compiler_version" // Compose Compiler
     implementation "androidx.compose.ui:ui:$compose_compiler_version" // Compose UI

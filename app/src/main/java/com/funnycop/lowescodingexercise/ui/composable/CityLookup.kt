@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -26,8 +28,15 @@ fun CityLookup(
 
 ) {
 
-    val weather by weatherViewModel.weather.observeAsState()
     var city by remember { mutableStateOf("") }
+
+    fun search() {
+
+        weatherViewModel.setCityName(city)
+        weatherViewModel.getForecast(city)
+        navController.navigate(WEATHER_LIST_DESTINATION)
+
+    }
 
     ConstraintLayout(
 
@@ -44,6 +53,15 @@ fun CityLookup(
             value = city,
             onValueChange = { city = it },
             label = { Text("City Name") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = { search() }),
+
+            colors = TextFieldDefaults.textFieldColors(
+
+                backgroundColor = Color.Transparent
+
+            ),
 
             modifier = Modifier.constrainAs(textField) {
 
@@ -75,13 +93,7 @@ fun CityLookup(
 
             content = { Text("Lookup") },
 
-            onClick = {
-
-                weatherViewModel.setCityName(city)
-                weatherViewModel.getForecast(city)
-                navController.navigate(WEATHER_LIST_DESTINATION)
-
-              },
+            onClick = { search() },
 
             modifier = Modifier.constrainAs(button) {
 
