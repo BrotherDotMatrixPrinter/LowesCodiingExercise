@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.funnycop.lowescodingexercise.util.WEATHER_INFORMATION_DESTINATION
 import com.funnycop.lowescodingexercise.viewmodel.WeatherViewModel
 
 @Composable
@@ -27,7 +28,7 @@ fun CityLookup(
     val weather by weatherViewModel.weather.observeAsState()
     var city by remember { mutableStateOf("") }
 
-    weather?.let { Log.d("DEBUG_INFO", it.toString()) }
+    weather?.let { navController.navigate(WEATHER_INFORMATION_DESTINATION) }
 
     ConstraintLayout(
 

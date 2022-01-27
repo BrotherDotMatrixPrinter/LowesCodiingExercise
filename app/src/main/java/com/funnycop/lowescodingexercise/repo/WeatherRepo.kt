@@ -11,19 +11,19 @@ class WeatherRepo @Inject constructor(
 
 ) {
 
-    suspend fun getForecast(code: String): SimpleWeatherData? {
+    suspend fun getForecast(code: String): List<SimpleWeatherData>? {
 
         val response = weatherService.getForecast(code)
-        val body = response?.list?.get(0) ?: return null
+        val body = response?.list ?: return null
 
-        return SimpleWeatherData(
+        return body.map { SimpleWeatherData(
 
-            body.main.temp,
-            body.main.feelsLike,
-            body.weather[0].main,
-            body.weather[0].description
+            it.main.temp,
+            it.main.feelsLike,
+            it.weather[0].main,
+            it.weather[0].description
 
-        )
+        ) }
 
     }
 

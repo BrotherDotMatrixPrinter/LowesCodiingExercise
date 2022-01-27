@@ -18,8 +18,8 @@ class WeatherViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _weather = MutableLiveData<SimpleWeatherData>(null)
-    val weather: LiveData<SimpleWeatherData> get() = _weather
+    private val _weather = MutableLiveData<List<SimpleWeatherData>>(null)
+    val weather: LiveData<List<SimpleWeatherData>> get() = _weather
 
     fun getForecast(code: String) = viewModelScope.launch(Dispatchers.IO) {
 
