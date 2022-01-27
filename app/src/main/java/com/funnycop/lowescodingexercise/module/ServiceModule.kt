@@ -1,12 +1,7 @@
 package com.funnycop.lowescodingexercise.module
 
-import com.funnycop.lowescodingexercise.model.TemperatureData
-import com.funnycop.lowescodingexercise.model.WeatherData
-import com.funnycop.lowescodingexercise.model.WeatherInformation
-import com.funnycop.lowescodingexercise.model.WeatherResponse
 import com.funnycop.lowescodingexercise.repo.WeatherService
 import com.funnycop.lowescodingexercise.util.API_URL
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,10 +16,14 @@ class ServiceModule {
 
     @Singleton
     @Provides
-    fun provideWeatherService() = Retrofit.Builder()
-        .baseUrl(API_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
-        .create(WeatherService::class.java)
+    fun provideWeatherService() : WeatherService {
+
+        return Retrofit.Builder()
+            .baseUrl(API_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(WeatherService::class.java)
+
+    }
 
 }

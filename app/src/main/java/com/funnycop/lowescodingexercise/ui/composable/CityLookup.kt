@@ -8,16 +8,26 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.funnycop.lowescodingexercise.viewmodel.WeatherViewModel
 
 @Composable
-fun CityLookup(navController: NavController) {
+fun CityLookup(
 
+    navController: NavController,
+    weatherViewModel: WeatherViewModel
+
+) {
+
+    val weather by weatherViewModel.weather.observeAsState()
     var city by remember { mutableStateOf("") }
+
+    weather?.let { Log.d("DEBUG_INFO", it.toString()) }
 
     ConstraintLayout(
 
@@ -64,7 +74,7 @@ fun CityLookup(navController: NavController) {
         OutlinedButton(
 
             content = { Text("Lookup") },
-            onClick = { /*TODO*/ },
+            onClick = { weatherViewModel.getForecast(city) },
 
             modifier = Modifier.constrainAs(button) {
 

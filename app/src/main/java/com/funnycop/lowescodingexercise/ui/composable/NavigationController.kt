@@ -1,31 +1,33 @@
 package com.funnycop.lowescodingexercise.ui.composable
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.funnycop.lowescodingexercise.ui.theme.LowesCodingExerciseTheme
+import com.funnycop.lowescodingexercise.util.CITY_LOOKUP_DESTINATION
+import com.funnycop.lowescodingexercise.util.WEATHER_INFORMATION_DESTINATION
+import com.funnycop.lowescodingexercise.viewmodel.WeatherViewModel
 
 @Composable
 fun NavigationController() {
 
     val navController = rememberNavController()
+    val weatherViewModel = hiltViewModel<WeatherViewModel>()
 
-    NavHost(navController, "CityLookup") {
+    NavHost(navController, CITY_LOOKUP_DESTINATION) {
 
-        composable("CityLookup") { CityLookup(navController) }
-
-        composable("WeatherInformation") { WeatherInformation(navController) }
+        composable(CITY_LOOKUP_DESTINATION) { CityLookup(navController, weatherViewModel) }
+        composable(WEATHER_INFORMATION_DESTINATION) { WeatherInformation(navController) }
 
     }
 
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    LowesCodingExerciseTheme {
-        NavigationController()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun Preview() {
+//    LowesCodingExerciseTheme {
+//        NavigationController()
+//    }
+//}
