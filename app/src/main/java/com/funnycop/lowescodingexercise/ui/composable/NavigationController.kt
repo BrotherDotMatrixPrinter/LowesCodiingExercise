@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.funnycop.lowescodingexercise.util.CITY_LOOKUP_DESTINATION
+import com.funnycop.lowescodingexercise.util.WEATHER_DETAIL_DESTINATION
 import com.funnycop.lowescodingexercise.util.WEATHER_LIST_DESTINATION
 import com.funnycop.lowescodingexercise.viewmodel.WeatherViewModel
 
@@ -19,6 +20,7 @@ fun NavigationController() {
 
         composable(CITY_LOOKUP_DESTINATION) { CityLookup(navController, weatherViewModel) }
         composable(WEATHER_LIST_DESTINATION) { WeatherList(navController, weatherViewModel) }
+        composable(WEATHER_DETAIL_DESTINATION) { WeatherDetail(navController, weatherViewModel) }
 
     }
 

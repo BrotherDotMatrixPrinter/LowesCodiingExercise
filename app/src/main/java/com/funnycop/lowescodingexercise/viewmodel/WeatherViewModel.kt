@@ -18,13 +18,23 @@ class WeatherViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _weather = MutableLiveData<List<SimpleWeatherData>>(null)
-    val weather: LiveData<List<SimpleWeatherData>> get() = _weather
+    private val _weather = MutableLiveData<List<SimpleWeatherData>?>(null)
+    val weather: LiveData<List<SimpleWeatherData>?> get() = _weather
+
+    private val _cityName = MutableLiveData("")
+    val cityName: LiveData<String> get() = _cityName
+
+    private val _selectedWeather = MutableLiveData<SimpleWeatherData?>(null)
+    val selectedWeather: LiveData<SimpleWeatherData?> get() = _selectedWeather
 
     fun getForecast(code: String) = viewModelScope.launch(Dispatchers.IO) {
 
         weatherRepo.getForecast(code)?.let { _weather.postValue(it) }
 
     }
+
+    fun setCityName(city: String) = _cityName.postValue(city)
+
+    fun setSelectedWeather(weather: SimpleWeatherData) = _selectedWeather.postValue(weather)
 
 }
