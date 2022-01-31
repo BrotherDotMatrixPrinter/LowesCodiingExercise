@@ -16,14 +16,16 @@ class WeatherRepo @Inject constructor(
         val response = weatherService.getForecast(code)
         val body = response?.list ?: return null
 
-        return body.map { SimpleWeatherData(
+        return body.map {
+            SimpleWeatherData(
 
-            it.main.temp,
-            it.main.feelsLike,
-            it.weather[0].main,
-            it.weather[0].description
+                it.main.temp,
+                it.main.feelsLike,
+                it.weather[0].main,
+                it.weather[0].description
 
-        ) }
+            )
+        }
 
     }
 

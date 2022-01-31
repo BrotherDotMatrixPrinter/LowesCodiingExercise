@@ -30,69 +30,75 @@ fun WeatherList(
 
     val weather by weatherViewModel.weather.observeAsState()
     val cityName by weatherViewModel.cityName.observeAsState()
-    
+
     Scaffold(
 
-        topBar = { TopNavigationBar(
+        topBar = {
+            TopNavigationBar(
 
-            title = "$cityName",
-            navigateBack = { navController.navigateUp() }
+                title = "$cityName",
+                navigateBack = { navController.navigateUp() }
 
-        )  }
+            )
+        }
 
     ) {
 
-        LazyColumn { weather?.forEach { item {
+        LazyColumn {
+            weather?.forEach {
+                item {
 
-            Row(
+                    Row(
 
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .clickable {
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .clickable {
 
-                        weatherViewModel.setSelectedWeather(it)
-                        navController.navigate(WEATHER_DETAIL_DESTINATION)
+                                weatherViewModel.setSelectedWeather(it)
+                                navController.navigate(WEATHER_DETAIL_DESTINATION)
+
+                            }
+
+                    ) {
+
+                        Text(
+
+                            text = it.weather,
+                            modifier = Modifier
+                                .fillMaxWidth(0.5f)
+                                .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
+
+                        )
+
+                        Text(
+
+                            text = "Temp: ${it.temperature}",
+                            modifier = Modifier
+                                .fillMaxWidth(0.5f)
+                                .padding(top = 16.dp, bottom = 16.dp)
+
+                        )
 
                     }
 
-            ) {
+                    Spacer(
 
-                Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(1.dp)
+                            .border(
 
-                    text = it.weather,
-                    modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
+                                width = 1.dp,
+                                color = if (isLightMode) RaisinBlack else Alabaster
 
-                )
-
-                Text(
-
-                    text = "Temp: ${it.temperature}",
-                    modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .padding(top = 16.dp, bottom = 16.dp)
-
-                )
-
-            }
-
-            Spacer(
-
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .border(
-
-                        width = 1.dp,
-                        color = if (isLightMode) RaisinBlack else Alabaster
+                            )
 
                     )
 
-            )
-
-        } } }
+                }
+            }
+        }
 
     }
 

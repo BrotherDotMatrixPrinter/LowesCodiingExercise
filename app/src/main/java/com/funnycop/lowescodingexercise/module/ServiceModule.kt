@@ -16,7 +16,7 @@ class ServiceModule {
 
     @Singleton
     @Provides
-    fun provideWeatherService() : WeatherService {
+    fun provideWeatherService(): WeatherService {
 
         return Retrofit.Builder()
             .baseUrl(API_URL)

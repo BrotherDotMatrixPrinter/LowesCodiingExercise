@@ -28,12 +28,14 @@ fun WeatherDetail(
 
     Scaffold(
 
-        topBar = { TopNavigationBar(
+        topBar = {
+            TopNavigationBar(
 
-            title = "$cityName",
-            navigateBack = { navController.navigateUp() }
+                title = "$cityName",
+                navigateBack = { navController.navigateUp() }
 
-        )  }
+            )
+        }
 
     ) {
 

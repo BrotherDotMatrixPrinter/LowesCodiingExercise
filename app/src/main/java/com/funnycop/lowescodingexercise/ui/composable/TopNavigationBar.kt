@@ -1,6 +1,9 @@
 package com.funnycop.lowescodingexercise.ui.composable
 
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -19,16 +22,18 @@ fun TopNavigationBar(
         title = { Text(title) },
         backgroundColor = DarkCornflowerBlue,
 
-        navigationIcon = { IconButton(onClick = navigateBack) {
+        navigationIcon = {
+            IconButton(onClick = navigateBack) {
 
-            Icon(
+                Icon(
 
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "Back"
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back"
 
-            )
+                )
 
-        } }
+            }
+        }
 
     )
 
